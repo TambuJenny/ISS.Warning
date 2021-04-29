@@ -9,6 +9,12 @@ namespace ISS.Warning.Model
     class EmailModel
     {
 
+        public static string From = "desenvolvimento@snir.co.ao";
+        public static string Password = "abc.123456";
+        public static string Host = "mail.ntchosting.com";
+        public static  bool EnableSsl = true;
+        public static  int Port = 25;
+
         /// <summary>
         /// A quem o email deve ser enviado.
         /// </summary>

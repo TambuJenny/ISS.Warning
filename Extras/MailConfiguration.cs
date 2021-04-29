@@ -38,16 +38,16 @@ namespace ISS.Warning.Extras
         public void Send(EmailModel EmailViewModel , Action<object, AsyncCompletedEventArgs> onCompleted = null)
         {
             // Configurar a mensagem a ser enviada.
-            var msg = new MailMessage(_configuration["MailSettings:From"], EmailViewModel.Destinatario);
+            var msg = new MailMessage(EmailModel.From, EmailViewModel.Destinatario);
             msg.Subject = EmailViewModel.Assunto;
             msg.Body = EmailViewModel.Conteudo;
             msg.IsBodyHtml = true;
             // Configurar o cliente SMTP
             var smtpClient = new SmtpClient();
-            smtpClient.Credentials = new NetworkCredential(_configuration["MailSettings:From"], _configuration["MailSettings:Password"]);
-            smtpClient.Host = _configuration["MailSettings:Host"];
-            smtpClient.Port = int.Parse(_configuration["MailSettings:Port"]);
-            smtpClient.EnableSsl = bool.Parse(_configuration["MailSettings:EnableSsl"]);
+            smtpClient.Credentials = new NetworkCredential(EmailModel.From, EmailModel.Password);
+            smtpClient.Host = EmailModel.Host;
+            smtpClient.Port = EmailModel.Port;
+            smtpClient.EnableSsl = EmailModel.EnableSsl;
 
             if (!EmailViewModel.SendNow)
                 Debug.WriteLine("Enviando ..."); // TODO: Implementar um background service para enviar o email na data programada.
@@ -69,17 +69,17 @@ namespace ISS.Warning.Extras
         public async Task SendAsync(EmailModel EmailViewModel , Action<object, AsyncCompletedEventArgs> onCompleted = null)
         {
             // Configurar a mensagem a ser enviada.
-            var msg = new MailMessage(_configuration["MailSettings:From"], EmailViewModel.Destinatario);
+            var msg = new MailMessage(EmailModel.From, EmailViewModel.Destinatario);
             msg.Subject = EmailViewModel.Assunto;
             msg.Body = EmailViewModel.Conteudo;
             msg.IsBodyHtml = true;
 
             // Configurar o cliente SMTP
             var smtpClient = new SmtpClient();
-            smtpClient.Credentials = new NetworkCredential(_configuration["MailSettings:From"], _configuration["MailSettings:Password"]);
-            smtpClient.Host = _configuration["MailSettings:Host"];
-            smtpClient.Port = int.Parse(_configuration["MailSettings:Port"]);
-            smtpClient.EnableSsl = bool.Parse(_configuration["MailSettings:EnableSsl"]);
+            smtpClient.Credentials = new NetworkCredential(EmailModel.From, EmailModel.Password);
+            smtpClient.Host = EmailModel.Host;
+            smtpClient.Port = EmailModel.Port;
+            smtpClient.EnableSsl = EmailModel.EnableSsl;
 
             if (!EmailViewModel.SendNow)
                 Debug.WriteLine("Enviando ..."); // TODO: Implementar um background service para enviar o email na data programada.

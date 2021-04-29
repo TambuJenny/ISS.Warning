@@ -83,6 +83,21 @@ namespace ISS.Warning.Classes
         }
 
 
+        public List<Apolice> buscar_apolice() 
+        {
+            List<Apolice> Apolice = new List<Apolice>();
+
+            using (var db = new DBIS_PRE_PRODEntities())
+            {
+                var _Apolice = db.Apolice.OrderBy(e => e.IdApolice).ToList();
+                Apolice = _Apolice;
+            }
+
+            return Apolice;
+        }
+
+        
+
 
 
 
